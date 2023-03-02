@@ -10,9 +10,13 @@ public interface TaskService {
 
     List<Task> getTasks();
 
+    Task getTask(Long taskId);
+
     Task getTask(String taskId);
 
     List<Task> getTaskBySeverity(int severity);
+
+    Task getTaskByNewId(String newId);
 
     Task updateTask(Task taskRequest);
 

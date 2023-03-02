@@ -12,11 +12,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class Task {
 
-    @Id
-    private String taskId;
+
+    private Long id;
     private String description;
     private int severity;
     private String assignee;
     private int storyPoint;
+    @Id
+    private String newId;
 
 }

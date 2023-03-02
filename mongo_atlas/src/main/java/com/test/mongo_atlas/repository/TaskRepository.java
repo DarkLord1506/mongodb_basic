@@ -7,4 +7,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface TaskRepository extends MongoRepository<Task,String> {
 
     List<Task> findBySeverity(int severity);
+
+    Task findByNewId(String newId);
+
+    void deleteByNewId(String taskId);
+
 }

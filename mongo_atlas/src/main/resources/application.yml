@@ -1,6 +1,6 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://mongo:mongo@mycluster.wmnhn6l.mongodb.net/?retryWrites=true&w=majority
+      uri: mongodb://localhost:27023/
       database: tasks
       port: 27017

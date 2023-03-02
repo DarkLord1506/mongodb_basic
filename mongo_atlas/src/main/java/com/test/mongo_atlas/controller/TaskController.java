@@ -42,6 +42,11 @@ public class TaskController {
         return new ResponseEntity<>(taskService.getTaskBySeverity(severity),HttpStatus.OK);
     }
 
+    @GetMapping("/newId/{newId}")
+    public ResponseEntity<Task> getTaskByNewId(@PathVariable("newId") String newId){
+        return new ResponseEntity<>(taskService.getTaskByNewId(newId),HttpStatus.OK);
+    }
+
     @PutMapping
     public ResponseEntity<Task> updateTask(@RequestBody Task task){
         return new ResponseEntity<>(taskService.updateTask(task),HttpStatus.OK);
