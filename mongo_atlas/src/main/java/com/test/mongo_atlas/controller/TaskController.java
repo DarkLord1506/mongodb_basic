@@ -2,6 +2,7 @@ package com.test.mongo_atlas.controller;
 
 import com.test.mongo_atlas.document.Task;
 import com.test.mongo_atlas.service.TaskService;
+import java.math.BigInteger;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,9 +32,13 @@ public class TaskController {
     public ResponseEntity<List<Task>> getAllTasks(){
         return new ResponseEntity<>(taskService.getTasks(),HttpStatus.OK);
     }
+    @GetMapping("/any/{id}")
+    public ResponseEntity<Task> getTaskThroughAnyField(@PathVariable("id") String id){
+        return new ResponseEntity<>(taskService.getTaskByAnyField(id),HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTaskById(@PathVariable("id") String taskId){
+    public ResponseEntity<Task> getTaskById(@PathVariable("id") BigInteger taskId){
         return new ResponseEntity<>(taskService.getTask(taskId),HttpStatus.OK);
     }
 

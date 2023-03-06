@@ -3,4 +3,12 @@ spring:
     mongodb:
       uri: mongodb://localhost:27023/
       database: tasks
-      port: 27017
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
