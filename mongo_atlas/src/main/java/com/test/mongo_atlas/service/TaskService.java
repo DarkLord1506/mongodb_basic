@@ -26,4 +26,8 @@ public interface TaskService {
     String deleteTask(String taskId);
 
     Task getTaskByAnyField(String id);
+
+    Task addTaskThroughTemplate(Task task);
+
+    Task getTaskByIdTemplate(BigInteger id);
 }

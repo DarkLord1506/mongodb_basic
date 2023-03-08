@@ -61,4 +61,14 @@ public class TaskController {
     public ResponseEntity<String> deleteTask(@PathVariable("id") String taskId){
         return new ResponseEntity<>(taskService.deleteTask(taskId),HttpStatus.OK);
     }
+
+    @PostMapping("/template")
+    public ResponseEntity<Task> addTaskByTemplate(@RequestBody Task task){
+        return new ResponseEntity<>(taskService.addTaskThroughTemplate(task),HttpStatus.OK);
+    }
+
+    @GetMapping("/template/{id}")
+    public ResponseEntity<Task> getTaskByTemplate(@PathVariable("id") BigInteger id){
+        return new ResponseEntity<>(taskService.getTaskByIdTemplate(id),HttpStatus.OK);
+    }
 }

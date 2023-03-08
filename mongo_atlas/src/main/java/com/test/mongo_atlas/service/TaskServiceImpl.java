@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,22 +18,12 @@ public class TaskServiceImpl implements TaskService{
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     @Override
     public Task addTask(Task task){
-      //  task.setTaskId(UUID.randomUUID().toString().split("-")[0]);
         task.setNewId(task.getId().toString());
-//        List<Task> dbValuesJustIds = taskRepository.getAllIds();
-//        List<Long> dbIds = dbValuesJustIds.stream().map(Task::getId).collect(Collectors.toList());
-//        Random random = new Random(10);
-//        do {
-//            task.setId(task.getId() + random.nextLong());
-//        }
-//        while (dbIds.contains(task.getId()));
-//        log.info("[addTask] All IDs present in DB {}",dbIds);
-//        if (dbIds.contains(task.getId())){
-//            throw new MongoException("You are trying to add already present ID. If you want to update please use separate method.");
-//        }
-//        log.info("[addTask] Id generated {}",task.getId());
         return taskRepository.save(task);
     }
     @Override
@@ -87,5 +78,15 @@ public class TaskServiceImpl implements TaskService{
             throw new MongoException("Value not present");
         }
         return result.get();
+    }
+    @Override
+    public Task addTaskThroughTemplate(Task task){
+        task.setNewId(task.getId().toString());
+        return mongoTemplate.insert(task,"tasks");
+    }
+
+    @Override
+    public Task getTaskByIdTemplate(BigInteger id){
+        return mongoTemplate.findById(id,Task.class);
     }
 }

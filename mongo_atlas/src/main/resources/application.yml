@@ -1,8 +1,10 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27023/
+      uri: mongodb://localhost:27018,localhost:27019,localhost:27020/?replicaSet=myReplicaSet&readPreference=secondaryPreferred
       database: tasks
+server:
+  port: 8080
 
 logging:
   level:
