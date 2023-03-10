@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Task {
+
     private String description;
     private int severity;
     private String assignee;

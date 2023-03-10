@@ -3,7 +3,6 @@ package com.test.mongo_atlas.service;
 import com.test.mongo_atlas.document.Task;
 import java.math.BigInteger;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 public interface TaskService {
 

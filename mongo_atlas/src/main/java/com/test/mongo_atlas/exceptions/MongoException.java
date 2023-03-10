@@ -1,6 +1,6 @@
 package com.test.mongo_atlas.exceptions;
 
-public class MongoException extends RuntimeException{
+public class MongoException extends RuntimeException {
 
     public MongoException() {
         super();

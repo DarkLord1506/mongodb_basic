@@ -16,10 +16,10 @@ public interface TaskRepository extends MongoRepository<Task, BigInteger> {
 
     void deleteByNewId(String taskId);
 
-    @Query(value = "{}",fields = "{_id:1}")
+    @Query(value = "{}", fields = "{_id:1}")
     List<Task> getAllIds();
 
-//    @Query(value = "{'_id': :#{#id}, 'newId': :#{#id} }")
+    //    @Query(value = "{'_id': :#{#id}, 'newId': :#{#id} }")
     @Query(value = "{'$or':[ {'_id': :#{#id}}, {'newId': :#{#id}} ] }")
     Optional<Task> findInDocument(@Param("id") String id);
 }

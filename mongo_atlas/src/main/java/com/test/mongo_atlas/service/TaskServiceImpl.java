@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskRepository taskRepository;
@@ -22,12 +22,13 @@ public class TaskServiceImpl implements TaskService{
     private MongoTemplate mongoTemplate;
 
     @Override
-    public Task addTask(Task task){
+    public Task addTask(Task task) {
         task.setNewId(task.getId().toString());
         return taskRepository.save(task);
     }
+
     @Override
-    public List<Task> getTasks(){
+    public List<Task> getTasks() {
         return taskRepository.findAll();
     }
 
@@ -38,26 +39,28 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public Task getTask(BigInteger taskId) {
-        return  taskRepository.findById(taskId).get();
+        return taskRepository.findById(taskId).get();
     }
 
 
     @Override
-    public Task getTask(String taskId){
-        log.info("[id] {}",taskId);
-        return  null;
+    public Task getTask(String taskId) {
+        log.info("[id] {}", taskId);
+        return null;
     }
+
     @Override
-    public List<Task> getTaskBySeverity(int severity){
+    public List<Task> getTaskBySeverity(int severity) {
         return taskRepository.findBySeverity(severity);
     }
 
     @Override
-    public Task getTaskByNewId(String newId){
+    public Task getTaskByNewId(String newId) {
         return taskRepository.findByNewId(newId);
     }
+
     @Override
-    public Task updateTask(Task taskRequest){
+    public Task updateTask(Task taskRequest) {
         Task dbTask = taskRepository.findByNewId(taskRequest.getNewId());
         dbTask.setDescription(taskRequest.getDescription());
         dbTask.setAssignee(taskRequest.getAssignee());
@@ -65,28 +68,30 @@ public class TaskServiceImpl implements TaskService{
         dbTask.setSeverity(taskRequest.getSeverity());
         return taskRepository.save(dbTask);
     }
+
     @Override
-    public String deleteTask(String taskId){
+    public String deleteTask(String taskId) {
         taskRepository.deleteByNewId(taskId);
-        return "Task deleted : "+taskId;
+        return "Task deleted : " + taskId;
     }
 
     @Override
     public Task getTaskByAnyField(String id) {
         Optional<Task> result = taskRepository.findInDocument(id);
-        if(!result.isPresent()){
+        if (!result.isPresent()) {
             throw new MongoException("Value not present");
         }
         return result.get();
     }
+
     @Override
-    public Task addTaskThroughTemplate(Task task){
+    public Task addTaskThroughTemplate(Task task) {
         task.setNewId(task.getId().toString());
-        return mongoTemplate.insert(task,"tasks");
+        return mongoTemplate.insert(task, "tasks");
     }
 
     @Override
-    public Task getTaskByIdTemplate(BigInteger id){
-        return mongoTemplate.findById(id,Task.class);
+    public Task getTaskByIdTemplate(BigInteger id) {
+        return mongoTemplate.findById(id, Task.class);
     }
 }

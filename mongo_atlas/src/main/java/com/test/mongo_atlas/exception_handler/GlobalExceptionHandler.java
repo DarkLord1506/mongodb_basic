@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(MongoException.class)
-    public ResponseEntity<ExceptionResponse> handleMongoException(MongoException mongoException){
+    public ResponseEntity<ExceptionResponse> handleMongoException(MongoException mongoException) {
         log.info("[handleMongoException] Handling mongo exception ");
         ExceptionResponse response = new ExceptionResponse(mongoException.getMessage(),
             HttpStatus.INTERNAL_SERVER_ERROR);
-        return new ResponseEntity<>(response,response.getStatus());
+        return new ResponseEntity<>(response, response.getStatus());
     }
 
 }
